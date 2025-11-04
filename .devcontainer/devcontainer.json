@@ -1,0 +1,64 @@
+
+{
+	"name": "Python 3.13",
+	"image": "mcr.microsoft.com/devcontainers/python:3.13-bookworm",
+	"features": {
+		"ghcr.io/jsburckhardt/devcontainer-features/uv": {}
+	},
+	"containerEnv": {
+	  "TZ": "America/Sao_Paulo",
+      "HOST_HOSTNAME": "${localEnv:COMPUTERNAME}"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"njpwerner.autodocstring",
+				"ms-python.black-formatter",
+				"tamasfe.even-better-toml",
+				"ms-python.vscode-pylance",
+				"ms-python.pylint",
+				"ms-python.debugpy",
+				"ms-python.vscode-python-envs",
+				"charliermarsh.ruff",
+				"camerom.vscode-pytest"
+			],
+			"settings": {
+				"python.defaultInterpreterPath": "./.venv/bin/python",
+                "files.encoding": "utf8",
+                "editor.detectIndentation": false,
+                "[python]": {
+                    "editor.tabSize": 4,
+                    "editor.insertSpaces": true
+                },
+                "[json]": {
+                    "editor.tabSize": 4,
+                    "editor.insertSpaces": true
+                },
+                "python.analysis.extraPaths": [
+                    "./app"
+                ],
+                "pylint.args": [
+                    "--max-line-length=240"
+                ],
+                "python.testing.unittestEnabled": false,
+                "python.testing.pytestEnabled": true,
+                "pylint.lintOnChange": false,
+                "python.analysis.typeCheckingMode": "off",
+                "files.exclude": {
+                    "**/.git": true,
+                    "**/__pycache__": true,
+                    "**/.venv": true
+                }
+			}
+		}
+	},
+	"forwardPorts": [40002],
+	"portsAttributes": {
+		"40002": {
+			"label": "Isis Report",
+			"onAutoForward": "notify"
+		}
+	},
+	"postCreateCommand": "bash dev/dependencies.sh"
+}
