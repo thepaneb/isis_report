@@ -1,0 +1,18 @@
+{% extends 'relatorio_base.jinja' %}
+{% from 'relatorio_tabular_sections.jinja' import render_detail, render_group, render_divisor %}
+{% block titulo %}{{titulo}}{% endblock %}
+{% block mode %}{{mode}}{% endblock %}
+{% block filters %}{{filters}}{% endblock %}
+{% block data_hora_impresssao %}{{data_hora_impresssao}}{% endblock %}
+{% block conteudo %}
+    {% if ds_items.detail and layout.detail %}
+        {{render_detail(ds_items.detail, layout.detail, zip, fmt)}}
+    {% elif ds_items.groups and layout.groups %}
+        {{render_group(ds_items.groups, layout.groups, zip, fmt, 0)}}
+    {% endif %}
+    {% if ds_items.summary and layout.summary %}
+        {% from 'relatorio_tabular_sections.jinja' import render_summary %}
+        {{render_divisor()}}
+        {{render_summary(ds_items.summary, layout.summary, zip, fmt)}}
+    {% endif %}
+{% endblock %}

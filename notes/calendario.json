@@ -1,0 +1,60 @@
+{
+    "meta": {
+        "company": "Minha Empresa",
+        "title": "Calendário Semanal",
+        "sub_title": "De 01/01/2024 até 31/12/2024",
+        "type": "pdf",
+        "mode": "exact"
+    },
+    "sections": [
+        {
+            "data_source": {
+                "query": "1"
+            },
+            "layout": {
+                "detail": [
+                    {
+                        "field": "semana",
+                        "label": "Semana",
+                        "alignment": "right"
+                    },
+                    {
+                        "field": "seg",
+                        "label": "Segunda-Feira",
+                        "alignment": "center"
+                    },
+                    {
+                        "field": "ter",
+                        "label": "Terça-Feira",
+                        "alignment": "center"
+                    },
+                    {
+                        "field": "qua",
+                        "label": "Quarta-Feira",
+                        "alignment": "center"
+                    },
+                    {
+                        "field": "qui",
+                        "label": "Quinta-Feira",
+                        "alignment": "center"
+                    },
+                    {
+                        "field": "sex",
+                        "label": "Sexta-Feira",
+                        "alignment": "center"
+                    },
+                    {
+                        "field": "sab",
+                        "label": "Sábado",
+                        "alignment": "center"
+                    },
+                    {
+                        "field": "dom",
+                        "label": "Domingo",
+                        "alignment": "center"
+                    }
+                ]
+            }
+        }
+    ]
+}

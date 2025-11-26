@@ -3,7 +3,6 @@ Status module initialization.
 """
 
 from api import Robyn
-
 from extensions.routes_loader import init_routes
 from modules.status.router import router
 

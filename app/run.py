@@ -5,7 +5,7 @@ Main entry point for the application.
 import importlib.util
 import os
 
-from api import app, Robyn
+from api import Robyn, app
 from extensions.log import basic_logger
 
 

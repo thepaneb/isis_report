@@ -8,7 +8,6 @@ from modules.status.models.status import StatusResponse
 from modules.status.router import router
 from modules.status.services.status import StatusService
 
-
 service = StatusService()
 
 

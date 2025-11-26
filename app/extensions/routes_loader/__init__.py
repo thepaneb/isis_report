@@ -17,9 +17,7 @@ def init_routes(file):
     for module_name in [
         name
         for name in os.listdir(routes_dir)
-        if name.endswith(".py")
-        and not name.startswith("__")
-        and os.path.isfile(os.path.join(routes_dir, name))
+        if name.endswith(".py") and not name.startswith("__") and os.path.isfile(os.path.join(routes_dir, name))
     ]:
         route_file = os.path.join(routes_dir, module_name)
         spec = importlib.util.spec_from_file_location(module_name, route_file)

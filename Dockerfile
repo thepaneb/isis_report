@@ -13,16 +13,16 @@ ENV UV_TOOL_BIN_DIR=/usr/local/bin
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv venv && uv sync --locked --no-install-project --no-dev
+    uv venv
+
+ENV PATH="/app/.venv/bin:$PATH"
 
 COPY app/ /app
 
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv sync --locked --no-dev
-
-ENV PATH="/app/.venv/bin:$PATH"
+    uv sync --locked --no-dev && playwright install --with-deps
 
 ENTRYPOINT []
 

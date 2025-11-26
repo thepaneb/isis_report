@@ -1,11 +1,10 @@
 """
 Logging extension for the application.
 """
-import os
-import time
 
 import logging
-
+import os
+import time
 
 LOCAL_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 project_dir_aux = LOCAL_DIR.split(os.sep)
@@ -31,9 +30,7 @@ def get_basic_logger():
     console_handler = logging.StreamHandler()
     console_handler.setLevel(logging.INFO)
 
-    formatter = logging.Formatter(
-        "%(asctime)s - %(levelname)s - %(name)s [%(filename)s; %(funcName)s; %(lineno)d] => %(message)s"
-    )
+    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(name)s [%(filename)s; %(funcName)s; %(lineno)d] => %(message)s")
     file_handler.setFormatter(formatter)
     console_handler.setFormatter(formatter)
 
@@ -41,5 +38,6 @@ def get_basic_logger():
     logger.addHandler(console_handler)
 
     return logger
+
 
 basic_logger = get_basic_logger()
