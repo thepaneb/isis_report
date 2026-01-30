@@ -1,7 +1,7 @@
 
 {
-	"name": "Python 3.13",
-	"image": "mcr.microsoft.com/devcontainers/python:3.13-bookworm",
+	"name": "Python 3.14",
+	"image": "mcr.microsoft.com/devcontainers/python:3.14-bookworm",
 	"features": {
 		"ghcr.io/jsburckhardt/devcontainer-features/uv": {}
 	},
@@ -21,7 +21,8 @@
 				"ms-python.debugpy",
 				"ms-python.vscode-python-envs",
 				"charliermarsh.ruff",
-				"camerom.vscode-pytest"
+				"camerom.vscode-pytest",
+                "samuelcolvin.jinjahtml"
 			],
 			"settings": {
 				"python.defaultInterpreterPath": "./.venv/bin/python",
