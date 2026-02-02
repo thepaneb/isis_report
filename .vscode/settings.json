@@ -1,0 +1,26 @@
+{
+    "files.encoding": "utf8",
+    "editor.detectIndentation": false,
+    "[python]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    },
+    "[json]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    },
+    "python.analysis.extraPaths": [
+        "/workspaces/isis_report/app"
+    ],
+    "pylint.args": [
+        "--max-line-length=140"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.analysis.typeCheckingMode": "off",
+    "files.exclude": {
+        "**/.git": true,
+        "**/__pycache__": true,
+        "**/.venv": false
+    }
+}

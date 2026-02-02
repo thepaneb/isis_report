@@ -22,7 +22,7 @@
             "editor.insertSpaces": true
         },
         "python.analysis.extraPaths": [
-            "./app"
+            "/workspaces/isis_report/app"
         ],
         "pylint.args": [
             "--max-line-length=140"
@@ -33,14 +33,14 @@
         "files.exclude": {
             "**/.git": true,
             "**/__pycache__": true,
-            "**/.venv": true
+            "**/.venv": false
         }
     },
     "launch": {
         "version": "0.2.0",
         "configurations": [
             {
-                "name": "Debug - DEV",
+                "name": "DEV",
                 "type": "debugpy",
                 "request": "launch",
                 "module": "robyn",
@@ -59,7 +59,7 @@
                 ]
             },
             {
-                "name": "Debug - FAST",
+                "name": "FAST",
                 "type": "debugpy",
                 "request": "launch",
                 "module": "robyn",
