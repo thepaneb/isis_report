@@ -27,6 +27,6 @@ jobs:
           ruff check .
       - name: Run tests
         env:
-          PYTHONPATH: ./app
+          PYTHONPATH: .
         run: |
           pytest -q
