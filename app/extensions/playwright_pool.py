@@ -6,13 +6,12 @@ Chromium on every request. Call `new_page()` to receive a fresh page and
 `close_browser()` on shutdown.
 """
 import asyncio
-from typing import Optional
 
-from playwright.async_api import async_playwright, Browser, Playwright
+from playwright.async_api import Browser, Playwright, async_playwright
 
 _playwright_ctx = None
-_playwright: Optional[Playwright] = None
-_browser: Optional[Browser] = None
+_playwright: Playwright | None = None
+_browser: Browser | None = None
 _lock = asyncio.Lock()
 
 

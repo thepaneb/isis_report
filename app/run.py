@@ -2,13 +2,12 @@
 Main entry point for the application.
 """
 
+import asyncio
+import atexit
 import importlib.util
 import os
 
 from api import Robyn, app
-import atexit
-import asyncio
-
 from extensions.log import basic_logger
 from extensions.playwright_pool import close_browser, ensure_browser_sync
 

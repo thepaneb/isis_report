@@ -4,10 +4,10 @@ Status module routes.
 
 from robyn import Headers, Response, jsonify
 
+from extensions.playwright_pool import ensure_browser
 from modules.status.models.status import StatusResponse
 from modules.status.router import router
 from modules.status.services.status import StatusService
-from extensions.playwright_pool import ensure_browser
 
 service = StatusService()
 

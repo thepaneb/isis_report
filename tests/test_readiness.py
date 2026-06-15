@@ -26,7 +26,7 @@ def _load_status_route_module():
 
             return _decorator
 
-        setattr(router_mod.router, "get", _noop_get)
+        router_mod.router.get = _noop_get
     except Exception:
         router_mod = None
         original_get = None
@@ -35,7 +35,7 @@ def _load_status_route_module():
         spec.loader.exec_module(module)
     finally:
         if router_mod is not None and original_get is not None:
-            setattr(router_mod.router, "get", original_get)
+            router_mod.router.get = original_get
     return module
 
 
