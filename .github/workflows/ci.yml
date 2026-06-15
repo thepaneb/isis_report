@@ -21,7 +21,7 @@ jobs:
           pip install -r dev-requirements.txt
       - name: Install Playwright browsers
         run: |
-          python -m playwright install --with-deps
+          python -m playwright install chromium --with-deps --only-shell
       - name: Lint (ruff)
         run: |
           ruff check .
