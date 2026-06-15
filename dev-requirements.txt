@@ -3,3 +3,4 @@ pytest
 pytest-asyncio
 playwright
 jinja2
+robyn[all]
