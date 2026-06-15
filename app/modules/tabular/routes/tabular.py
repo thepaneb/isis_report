@@ -13,7 +13,7 @@ from modules.tabular.services.tabular import TabularService
 @router.post("", openapi_name="Tabular Report", openapi_tags=["tabular"])
 async def post_root(request):
     """
-    Returns "Tabular Report" string.
+    Returns "Tabular Report" content.
     """
     json_data = json.loads(request.body)
     service = TabularService()

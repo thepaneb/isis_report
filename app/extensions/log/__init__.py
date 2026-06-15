@@ -22,6 +22,10 @@ def get_basic_logger():
         os.makedirs(log_dir)
 
     logger = logging.getLogger("basic_logger")
+    # Avoid adding duplicate handlers on module reloads
+    if logger.handlers:
+        return logger
+
     logger.setLevel(logging.DEBUG)
 
     file_handler = logging.FileHandler(log_file)

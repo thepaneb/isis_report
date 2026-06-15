@@ -6,11 +6,12 @@ import locale
 from datetime import datetime
 
 import pandas as pd
-from playwright.async_api import async_playwright
 
+from constants import FOOTER_TEMPLATE, HEADER_TEMPLATE, PAGE_MARGIN
 from ds.calendario_semanal import ds as ds_calendario
 from ds.pedido_cartao import ds as ds_pedido
 from extensions.jinja_template import render_template
+from extensions.playwright_pool import new_page
 
 
 class TabularService:  # pylint: disable=too-few-public-methods
@@ -121,7 +122,11 @@ class TabularService:  # pylint: disable=too-few-public-methods
         """
         Generate HTML report using Jinja2 template.
         """
-        locale.setlocale(locale.LC_ALL, "")
+        try:
+            locale.setlocale(locale.LC_ALL, "")
+        except Exception:
+            # In some runtime environments locale may not be configured; fallback silently
+            pass
 
         def fmt(valor, mascara):
             try:
@@ -135,7 +140,7 @@ class TabularService:  # pylint: disable=too-few-public-methods
                     return f"{valor:%d/%m/%y %H:%M:%S}"
 
                 return valor
-            except:  # pylint: disable=bare-except # noqa: E722
+            except Exception:
                 return valor
 
         return await render_template(
@@ -152,32 +157,30 @@ class TabularService:  # pylint: disable=too-few-public-methods
         )
 
     async def __gerar_pdf(self, texto_html) -> bytes:
-        async with async_playwright() as p:
-            browser = await p.chromium.launch()
-            page = await browser.new_page()
+        page = None
+        try:
+            page = await new_page()
             await page.set_content(texto_html)
             res = await page.pdf(
                 format="A4",
                 display_header_footer=True,
-                header_template="<span>teste</span>",
-                footer_template="""
-<div style="width: 100%; text-align: center; font-size: 10px; display: table;">
-    <div class="date" style="display: table-cell; text-align: center; vertical-align: middle;"></div>
-    <div style="display: table-cell; text-align: center; vertical-align: middle;">
-    </div>
-    <div style="display: table-cell; text-align: center; vertical-align: middle;">Página <span class="pageNumber"></span> de <span class="totalPages"></span></div>
-</div>""",
-                margin={"top": ".2in", "bottom": ".5in"},
+                header_template=HEADER_TEMPLATE,
+                footer_template=FOOTER_TEMPLATE,
+                margin=PAGE_MARGIN,  # type: ignore[arg-type]
             )
-            await browser.close()
-
-        return res
+            return res
+        finally:
+            if page is not None:
+                try:
+                    await page.close()
+                except Exception:
+                    pass
 
     async def generate_report(self, data: dict):
         """
         Generate a tabular report based on the provided data.
         """
-        data_source_def = data.get("data_source")
+        data_source_def = data.get("data_source") or {}
         query = data_source_def.get("query")
         response_type = data.get("type")
         dados_obtidos = await self.__obter_dados(query)
@@ -186,7 +189,7 @@ class TabularService:  # pylint: disable=too-few-public-methods
         html_content = await self.__gerar_html(
             dados_tratados=dados_tratados,
             payload=data,
-            layout="relatorio_tabular_controller.jinja",
+            layout="relatorio_tabular_controller.j2",
         )
 
         if response_type == "pdf":

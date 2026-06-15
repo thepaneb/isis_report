@@ -1,5 +1,5 @@
-{% extends 'relatorio_base.jinja' %}
-{% from 'relatorio_tabular_sections.jinja' import render_detail, render_group, render_divisor %}
+{% extends 'relatorio_base.j2' %}
+{% from 'relatorio_sections_fragments.j2' import render_detail, render_group, render_divisor %}
 {% block titulo %}{{titulo}}{% endblock %}
 {% block mode %}{{mode}}{% endblock %}
 {% block filters %}{{filters}}{% endblock %}
@@ -11,7 +11,7 @@
         {{render_group(ds_items.groups, layout.groups, zip, fmt, 0)}}
     {% endif %}
     {% if ds_items.summary and layout.summary %}
-        {% from 'relatorio_tabular_sections.jinja' import render_summary %}
+        {% from 'relatorio_sections_fragments.j2' import render_summary %}
         {{render_divisor()}}
         {{render_summary(ds_items.summary, layout.summary, zip, fmt)}}
     {% endif %}

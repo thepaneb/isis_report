@@ -30,10 +30,15 @@ class JinjaTemplate(TemplateInterface):  # pylint: disable=too-few-public-method
         """
         super().__init__()
 
-        self.env = Environment(loader=FileSystemLoader(searchpath=directory, encoding=encoding, followlinks=followlinks))
+        # Enable async rendering to avoid blocking the event loop
+        self.env = Environment(
+            loader=FileSystemLoader(searchpath=directory, encoding=encoding, followlinks=followlinks),
+            enable_async=True,
+        )
 
     async def render_template(self, *args, **kwargs) -> str:
         """
-        Render a template with the given name and context.
+        Render a template with the given name and context using async rendering.
         """
-        return self.env.get_template(args[0]).render(**kwargs)
+        template = self.env.get_template(args[0])
+        return await template.render_async(**kwargs)

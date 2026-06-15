@@ -6,7 +6,7 @@ import os
 import pathlib
 from typing import Any
 
-from extensions.jinja_template.templating import JinjaTemplate
+from .templating import JinjaTemplate
 
 current_file_path = pathlib.Path(__file__).parent.parent.parent.resolve()
 jinja_template = JinjaTemplate(os.path.join(current_file_path, "templates"))
