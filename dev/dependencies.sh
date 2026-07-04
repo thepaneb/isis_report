@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo gpg --yes --dearmor -o /usr/share/keyrings/yarnkey.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list > /dev/null
-sudo apt update
-
 # Use `uv` to sync dependencies from pyproject.toml into the project's virtualenv
 if ! command -v uv >/dev/null 2>&1; then
 	echo "uv not found in PATH. Install uv (e.g. 'pip install uv') or make it available before running this script."
