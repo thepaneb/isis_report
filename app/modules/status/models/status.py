@@ -2,7 +2,6 @@
 Status response model.
 """
 
-from typing import Optional
 
 from robyn.types import JSONResponse
 
@@ -17,4 +16,4 @@ class StatusResponse(JSONResponse):
             setattr(self, key, value)
 
     status: str
-    uptime: Optional[float] = None
+    uptime: float | None = None

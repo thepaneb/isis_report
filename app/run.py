@@ -30,8 +30,8 @@ def init_modules(robyn_app: Robyn):
             if hasattr(module, "init_module"):
                 module.init_module(robyn_app)
                 basic_logger.info("Initialized module: %s", module_name)
-        except Exception as e:  # pylint: disable=broad-except
-            basic_logger.error("Failed to initialize module %s: %s", module_name, e)
+        except Exception:  # pylint: disable=broad-except  # noqa: BLE001
+            basic_logger.exception("Failed to initialize module %s", module_name)
 
 
 init_modules(app)

@@ -1,0 +1,43 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "DEV",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "robyn",
+            "env": {
+                "ROBYN_DEV_MODE": "True",
+                "ROBYN_HOST": "0.0.0.0",
+                "ROBYN_PORT": "40002"
+            },
+            "args": [
+                "app/run.py",
+                "--dev",
+                "--processes=1",
+                "--workers=1",
+                "--log-level",
+                "DEBUG"
+            ]
+        },
+        {
+            "name": "FAST",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "robyn",
+            "env": {
+                "ROBYN_DEV_MODE": "True",
+                "ROBYN_HOST": "0.0.0.0",
+                "ROBYN_PORT": "40002"
+            },
+            "args": [
+                "app/run.py",
+                "--fast",
+                "--processes=1",
+                "--workers=1",
+                "--log-level",
+                "DEBUG"
+            ]
+        }
+    ]
+}

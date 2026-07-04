@@ -2,20 +2,30 @@
 Tabular module routes.
 """
 
-import json
-
-from robyn import Response
+from robyn import Request, Response
 
 from modules.tabular.router import router
-from modules.tabular.services.tabular import TabularService
+from modules.tabular.services.tabular_service import TabularService
+
+service = TabularService()
 
 
 @router.post("", openapi_name="Tabular Report", openapi_tags=["tabular"])
-async def post_root(request):
+async def post_root(request: Request):
     """
-    Returns "Tabular Report" string.
+    Generate a tabular report.
     """
-    json_data = json.loads(request.body)
-    service = TabularService()
-    response_data, content_type = await service.generate_report(json_data)
-    return Response(description=response_data, status_code=200, headers={"Content-Type": content_type})
+    try:
+        payload = request.json()
+        pdf_bytes = await service.execute(payload)
+        return Response(
+            status_code=200,
+            headers={"Content-Type": "application/pdf"},
+            description=pdf_bytes,
+        )
+    except Exception as e:  # pylint: disable=broad-except
+        return Response(
+            status_code=500,
+            headers={"Content-Type": "application/json"},
+            description=f'{{"error": "{str(e)}"}}',
+        )

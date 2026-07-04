@@ -6,10 +6,7 @@ import logging
 import os
 import time
 
-LOCAL_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-project_dir_aux = LOCAL_DIR.split(os.sep)
-project_dir_aux.pop()
-PROJECT_DIR = os.sep.join(project_dir_aux)
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 log_dir = os.path.join(PROJECT_DIR, "logs")
 log_file = os.path.join(log_dir, f"log_{time.strftime('%Y_%m_%d')}.log")
 

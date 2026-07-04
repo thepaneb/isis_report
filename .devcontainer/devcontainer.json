@@ -1,9 +1,10 @@
 
 {
-	"name": "Python 3.14",
-	"image": "mcr.microsoft.com/devcontainers/python:3.14-bookworm",
+	"name": "isis-report",
+    "runArgs": ["--name", "isis-report"],
+	"image": "mcr.microsoft.com/devcontainers/python:3.14",
 	"features": {
-		"ghcr.io/jsburckhardt/devcontainer-features/uv": {}
+		"ghcr.io/jsburckhardt/devcontainer-features/uv:latest": {}
 	},
 	"containerEnv": {
 	  "TZ": "America/Sao_Paulo",
@@ -22,10 +23,11 @@
 				"ms-python.vscode-python-envs",
 				"charliermarsh.ruff",
 				"camerom.vscode-pytest",
-                "samuelcolvin.jinjahtml"
+                "samuelcolvin.jinjahtml",
+                "google.geminicodeassist"
 			],
 			"settings": {
-				"python.defaultInterpreterPath": "/workspaces/isis_report/.venv/bin/python",
+				"python.defaultInterpreterPath": "/workspace/.venv/bin/python",
                 "files.encoding": "utf8",
                 "editor.detectIndentation": false,
                 "[python]": {
@@ -37,7 +39,7 @@
                     "editor.insertSpaces": true
                 },
                 "python.analysis.extraPaths": [
-                    "/workspaces/isis_report/app"
+                    "/workspace/app"
                 ],
                 "pylint.args": [
                     "--max-line-length=140"
@@ -61,5 +63,9 @@
 			"onAutoForward": "notify"
 		}
 	},
-	"postCreateCommand": "bash dev/dependencies.sh"
+	"postCreateCommand": "bash dev/dependencies.sh",
+    "workspaceFolder": "/workspace",
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspace,type=bind"
+    ]
 }

@@ -6,13 +6,12 @@ Chromium on every request. Call `new_page()` to receive a fresh page and
 `close_browser()` on shutdown.
 """
 import asyncio
-from typing import Optional
 
-from playwright.async_api import async_playwright, Browser, Playwright
+from playwright.async_api import Browser, Playwright, async_playwright
 
 _playwright_ctx = None
-_playwright: Optional[Playwright] = None
-_browser: Optional[Browser] = None
+_playwright: Playwright | None = None
+_browser: Browser | None = None
 _lock = asyncio.Lock()
 
 
@@ -47,19 +46,12 @@ def ensure_browser_sync(headless: bool = True) -> None:
         return
     try:
         loop = asyncio.get_event_loop()
-        loop.create_task(ensure_browser(headless=headless))
+        if loop.is_running():
+            loop.create_task(ensure_browser(headless=headless))
+        else:
+            loop.run_until_complete(ensure_browser(headless=headless))
     except RuntimeError:
         asyncio.run(ensure_browser(headless=headless))
-    except RuntimeError:
-        try:
-            loop = asyncio.get_event_loop()
-            if loop.is_running():
-                loop.create_task(ensure_browser(headless=headless))
-            else:
-                loop.run_until_complete(ensure_browser(headless=headless))
-        except Exception:
-            # If even this fails, let the caller handle/log the situation.
-            raise
 
 
 async def new_page():
@@ -69,6 +61,35 @@ async def new_page():
     """
     await _ensure_browser()
     return await _browser.new_page()
+
+
+async def get_pdf_from_html(html: str, **kwargs) -> bytes:
+    """
+    Render HTML to PDF using the shared browser pool.
+
+    Args:
+        html: The HTML content to render.
+        **kwargs: Additional arguments passed to ``page.pdf()``.
+
+    Returns:
+        The PDF bytes.
+    """
+    page = await new_page()
+    try:
+        await page.set_content(html)
+        return await page.pdf(
+            format=kwargs.get("format", "A4"),
+            display_header_footer=kwargs.get("display_header_footer", True),
+            header_template=kwargs.get("header_template", ""),
+            footer_template=kwargs.get(
+                "footer_template",
+                '<div style="width:100%;text-align:center;font-size:10px;">'
+                "Página <span class='pageNumber'></span> de <span class='totalPages'></span></div>",
+            ),
+            margin=kwargs.get("margin", {"top": ".2in", "bottom": ".5in", "left": ".2in", "right": ".2in"}),
+        )
+    finally:
+        await page.close()
 
 
 async def close_browser():

@@ -25,5 +25,5 @@ def init_routes(file):
         try:
             spec.loader.exec_module(module)
             basic_logger.info("Loaded route: %s", module_name)
-        except Exception as e:  # pylint: disable=broad-except
-            basic_logger.error("Failed to load route %s: %s", module_name, e)
+        except Exception:  # pylint: disable=broad-except # noqa: BLE001
+            basic_logger.exception("Failed to load route %s", module_name)
