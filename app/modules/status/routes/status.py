@@ -1,21 +1,24 @@
-"""
-Status module routes.
-"""
-
 from robyn import Headers, Response, jsonify
 
-from modules.status.models.status import StatusResponse
+from modules.status.models.status import StatusErrorResponse, StatusResponse
 from modules.status.router import router
 from modules.status.services.status import StatusService
 
 service = StatusService()
 
 
-@router.get("", openapi_name="Application Healtcheck", openapi_tags=["status"])
+@router.get(
+    "",
+    openapi_name="Application Healtcheck",
+    openapi_tags=["status"],
+    responses={
+        500: {
+            "model": StatusErrorResponse,
+            "description": "Aplicação indisponível",
+        },
+    },
+)
 async def get_root() -> StatusResponse:
-    """
-    Returns the application status.
-    """
     try:
         response = await service.processar()
 
@@ -24,9 +27,9 @@ async def get_root() -> StatusResponse:
             headers=Headers({"Content-Type": "application/json"}),
             description=jsonify(StatusResponse(response)),
         )
-    except Exception:  # pylint: disable=broad-except
+    except Exception:
         return Response(
             status_code=500,
             headers=Headers({"Content-Type": "application/json"}),
-            description=jsonify(StatusResponse({"status": "unhealthy"})),
+            description=jsonify(StatusErrorResponse({"status": "unhealthy"})),
         )

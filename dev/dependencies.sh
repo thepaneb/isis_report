@@ -8,7 +8,10 @@ if ! command -v uv >/dev/null 2>&1; then
 fi
 
 echo "Running 'uv sync' to install project dependencies from pyproject.toml..."
-uv sync
+uv sync --upgrade
+
+echo "Running 'uv lock --upgrade' to update the lock file..."
+uv lock --upgrade
 
 # Activate the virtual environment created/managed by uv (commonly .venv)
 if [ -f ".venv/bin/activate" ]; then
@@ -24,3 +27,7 @@ fi
 # Install Playwright browsers using the active Python interpreter
 echo "Installing Playwright Chromium (headless)"
 python -m playwright install chromium --with-deps --only-shell
+
+# Install OpenCode CLI tool
+echo "Installing OpenCode CLI tool"
+curl -fsSL https://opencode.ai/install | bash

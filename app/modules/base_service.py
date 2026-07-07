@@ -1,12 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, final
 
-import pandas as pd
-
 from extensions.log import basic_logger
-
-# Ativando Copy-on-Write para performance otimizada no Pandas 3.14+
-pd.options.mode.copy_on_write = True
 
 
 class BaseReportService(ABC):
@@ -28,7 +23,7 @@ class BaseReportService(ABC):
             # 1. Recuperação
             raw_data = await self._obter_dados(payload)
 
-            # 2. Transformação (Pandas/Lógica de Negócio)
+            # 2. Transformação (Lógica de Negócio)
             processed_data = await self._tratar_dados(raw_data, payload)
 
             # 3. Renderização
@@ -49,7 +44,7 @@ class BaseReportService(ABC):
 
     @abstractmethod
     async def _tratar_dados(self, data: Any, payload: dict[str, Any]) -> Any:
-        """Aplica lógica de agrupamento e agregação via Pandas"""
+        """Aplica lógica de agrupamento e agregação"""
 
     @abstractmethod
     async def _gerar_html(self, data: Any, payload: dict[str, Any]) -> str:

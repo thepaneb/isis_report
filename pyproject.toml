@@ -6,10 +6,15 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "jinja2",
-    "pandas",
     "playwright",
-    "robyn",
+    "robyn[all]",
 ]
+
+[tool.setuptools.packages.find]
+where = ["app"]
+
+[dependency-groups]
+dev = ["pytest", "pytest-asyncio", "pytest-html", "pytest-cov"]
 [tool.ruff]
 line-length = 140
 indent-width = 4
@@ -47,6 +52,9 @@ select = ["E", "F", "I", "B", "UP"]
 ignore = [
     "E501",  # line too long
 ]
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"

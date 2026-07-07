@@ -1,3 +1,0 @@
-[MASTER]
-# Adiciona a pasta 'app' ao path para que o Pylint reconheça os imports internos como raízes
-init-hook='import sys; sys.path.append("./app")'

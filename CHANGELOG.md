@@ -1,8 +1,0 @@
-Changelog:\n\n- b0ac37e atualização de libs (Gil Cleber Barboza)
-- c4197c9 python 3.14 e libs (Gil Cleber Barboza)
-- 68be5dd python 3.14 (Gil Cleber Barboza)
-- 74dd56b atualização de dependencias (Gil Cleber Barboza)
-- 6f8dfe8 diversos ajustes (Gil Cleber Barboza)
-- 2671ddc criação de extensão para injeção das rotas (Gil Cleber Barboza)
-- 49a9831 commit inicial da estrutura basica (Gil Cleber Barboza)
-- 1dffea5 Initial commit (Gil Cleber Barboza)
