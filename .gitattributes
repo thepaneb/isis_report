@@ -1,0 +1,28 @@
+* text=auto eol=lf
+
+*.py text diff=python
+*.pyi text diff=python
+*.toml text
+*.yaml text
+*.yml text
+*.json text
+*.md text
+*.jinja text
+*.html text
+*.css text
+*.js text
+*.sh text eol=lf
+*.cfg text
+*.ini text
+*.lock text
+*.dockerfile text
+Dockerfile text
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.so binary
+*.pyc binary
