@@ -1,8 +1,10 @@
+"""Parser for .toon text format used in report definitions."""
 import re
 from typing import Any
 
 
 class ToonParser:
+    """Parser for .toon format converting text to structured dictionaries."""
 
     @staticmethod
     def _convert_value(value: str) -> Any:
@@ -22,6 +24,7 @@ class ToonParser:
         return v
 
     def parse(self, text: str) -> dict:
+        """Parse .toon text into a structured dictionary."""
         tokens = self._tokenize(text)
         result, _ = self._parse_dict(tokens, 0, 0)
         if 'dados' in result:

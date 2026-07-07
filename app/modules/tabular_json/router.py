@@ -1,3 +1,4 @@
+"""Tabular JSON module router."""
 from robyn import SubRouter
 
 from constants import BASE_PATH

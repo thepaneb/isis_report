@@ -1,30 +1,39 @@
+"""Tests for layout converter utility."""
 from utils.layout_converter import _format_field, converter_layout_hierarquico
 
 
 class TestFormatField:
+    """Tests for _format_field helper."""
     def test_all_fields(self):
+        """Return formatted field with all attributes."""
         result = _format_field("nome", {"label": "Nome", "format_mask": "str", "alignment": "left"})
         assert result == {"name": "nome", "label": "Nome", "format_mask": "str", "alignment": "left"}
 
     def test_missing_label(self):
+        """Use field name as label when label is missing."""
         result = _format_field("nome", {"format_mask": "int", "alignment": "right"})
         assert result["label"] == "nome"
 
     def test_missing_format_mask(self):
+        """Default to 'str' when format_mask is missing."""
         result = _format_field("nome", {"label": "Nome"})
         assert result["format_mask"] == "str"
 
     def test_missing_alignment(self):
+        """Default to 'left' when alignment is missing."""
         result = _format_field("nome", {"label": "Nome"})
         assert result["alignment"] == "left"
 
 
 class TestConverterLayoutHierarquico:
+    """Tests for converter_layout_hierarquico."""
     def test_empty(self):
+        """Return empty header for empty layout."""
         result = converter_layout_hierarquico({})
         assert result == {"groups": {"header": []}}
 
     def test_simple_fields(self):
+        """Convert flat key-value layout to header list."""
         result = converter_layout_hierarquico({
             "nome": {"label": "Nome", "format_mask": "str", "alignment": "left"},
             "idade": {"label": "Idade", "format_mask": "int", "alignment": "right"},
@@ -34,6 +43,7 @@ class TestConverterLayoutHierarquico:
         assert result["groups"]["header"][1]["name"] == "idade"
 
     def test_single_group(self):
+        """Convert layout with one group section."""
         result = converter_layout_hierarquico({
             "empresa": {"label": "Empresa", "format_mask": "str", "alignment": "left"},
             "pedidos": {
@@ -48,6 +58,7 @@ class TestConverterLayoutHierarquico:
         assert groups["header"][1]["name"] == "valor"
 
     def test_group_with_detail(self):
+        """Convert layout with group containing detail fields."""
         result = converter_layout_hierarquico({
             "titulo": {"label": "Título", "format_mask": "str", "alignment": "left"},
             "grupo": {
@@ -65,6 +76,7 @@ class TestConverterLayoutHierarquico:
         assert groups["detail"][1]["name"] == "sub2"
 
     def test_only_group_no_simple(self):
+        """Handle layout with only group fields and no simple fields."""
         result = converter_layout_hierarquico({
             "pedidos": {
                 "pedido": {"label": "Pedido", "format_mask": "int", "alignment": "right"},

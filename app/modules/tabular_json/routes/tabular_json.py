@@ -1,3 +1,4 @@
+"""Tabular JSON HTTP routes."""
 import json
 
 from robyn import Request, Response
@@ -21,6 +22,7 @@ service = TabularJsonService()
     },
 )
 async def post_root(request: Request, payload: ReportPayload):
+    """Generate PDF report from JSON payload."""
     try:
         pdf_bytes = await service.execute(payload.model_dump())
         return Response(

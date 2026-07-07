@@ -1,3 +1,4 @@
+"""Test configuration and fixtures."""
 import sys
 from pathlib import Path
 

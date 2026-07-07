@@ -10,10 +10,11 @@
         "editor.insertSpaces": true
     },
     "python.analysis.extraPaths": [
-        "/workspaces/isis_report/app"
+        "${workspaceFolder}/app"
     ],
     "pylint.args": [
-        "--max-line-length=140"
+        "--max-line-length=140",
+        "--init-hook=import sys; from pathlib import Path; sys.path.insert(0, str(Path.cwd() / 'app'))"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,

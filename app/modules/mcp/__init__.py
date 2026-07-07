@@ -1,3 +1,4 @@
+"""MCP (Model Context Protocol) module for AI tool integrations."""
 import base64
 import json
 
@@ -13,6 +14,7 @@ toon_parser = ToonParser()
 
 
 def init_module(robyn_app: Robyn):
+    """Register MCP tools for JSON and .toon report generation."""
 
     _EXEMPLO_JSON = {
         "meta": {

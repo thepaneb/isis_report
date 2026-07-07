@@ -1,3 +1,4 @@
+"""Layout converter utility for hierarchical layout definitions."""
 from typing import Any
 
 
@@ -11,6 +12,7 @@ def _format_field(name: str, field_def: dict[str, Any]) -> dict[str, Any]:
 
 
 def converter_layout_hierarquico(layout_raw: dict[str, Any]) -> dict[str, Any]:
+    """Convert hierarchical layout definition to render-ready format."""
     header = []
     groups = None
 

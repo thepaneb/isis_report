@@ -1,3 +1,4 @@
+"""Base report service defining the report generation lifecycle."""
 from abc import ABC, abstractmethod
 from typing import Any, final
 

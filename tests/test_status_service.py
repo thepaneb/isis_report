@@ -1,3 +1,4 @@
+"""Tests for StatusService."""
 from unittest.mock import patch
 
 from modules.status.services.status import StatusService
@@ -6,13 +7,16 @@ service = StatusService()
 
 
 class TestProcessar:
+    """Tests for processar method."""
     async def test_success(self):
+        """Return healthy status with uptime."""
         result = await service.processar()
         assert result["status"] == "healthy"
         assert result["uptime"] == 12345.67
 
     @patch("extensions.log.basic_logger")
     async def test_exception(self, mock_logger):
+        """Return unhealthy status on error and log the exception."""
         original_processar = StatusService.processar
 
         async def broken_processar(self):

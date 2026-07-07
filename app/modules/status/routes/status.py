@@ -1,3 +1,4 @@
+"""Status module HTTP routes."""
 from robyn import Headers, Response, jsonify
 
 from modules.status.models.status import StatusErrorResponse, StatusResponse
@@ -19,6 +20,7 @@ service = StatusService()
     },
 )
 async def get_root() -> StatusResponse:
+    """Return application health status."""
     try:
         response = await service.processar()
 

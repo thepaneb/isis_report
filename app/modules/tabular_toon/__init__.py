@@ -1,8 +1,10 @@
+"""Tabular .toon module initialization."""
 from api import Robyn
 from extensions.routes_loader import init_routes
 from modules.tabular_toon.router import router
 
 
 def init_module(robyn_app: Robyn):
+    """Initialize tabular .toon module routes."""
     init_routes(__file__)
     robyn_app.include_router(router)

@@ -1,3 +1,4 @@
+"""Shared report service implementing common report generation logic."""
 from typing import Any
 
 from extensions.jinja_template import render_template
@@ -7,6 +8,7 @@ from utils.layout_converter import converter_layout_hierarquico
 
 
 class SharedReportService(BaseReportService):
+    """Shared implementation of BaseReportService with layout conversion and data formatting."""
 
     async def _obter_dados(self, payload: dict[str, Any]) -> Any:
         return payload.get("data", [])

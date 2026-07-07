@@ -1,3 +1,4 @@
+"""Tabular .toon HTTP routes."""
 import json
 
 from robyn import Request, Response
@@ -23,6 +24,7 @@ parser = ToonParser()
     },
 )
 async def post_root(request: Request):
+    """Generate PDF report from .toon text payload."""
     try:
         body = request.body
         text = body.decode("utf-8") if isinstance(body, bytes) else body
