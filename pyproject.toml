@@ -14,7 +14,7 @@ dependencies = [
 where = ["app"]
 
 [dependency-groups]
-dev = ["pytest", "pytest-asyncio", "pytest-html", "pytest-cov"]
+dev = ["pytest", "pytest-asyncio", "pytest-html", "pytest-cov", "ruff"]
 [tool.ruff]
 line-length = 140
 indent-width = 4
