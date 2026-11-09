@@ -17,15 +17,16 @@ app/
 ├── modules/
 │   ├── status/        # Healthcheck da aplicação
 │   ├── tabular_json/  # POST /app/tabular-json  (entrada JSON)
-│   └── tabular_toon/  # POST /app/tabular-toon  (entrada .toon)
-├── templates/         # Templates Jinja2
-├── extensions/        # Jinja, Playwright pool, logger
-├── utils/             # Layout converter, parser .toon
+│   ├── tabular_toon/  # POST /app/tabular-toon  (entrada .toon)
+│   └── mcp/           # Tools MCP
+├── extensions/        # Logger e loader de rotas
 └── run.py             # Entry point
 ```
 
-Cada módulo segue o pipeline definido em `BaseReportService`:
-`_obter_dados → _tratar_dados → _gerar_html → _gerar_pdf`
+A renderização (Jinja2) e a geração de PDF (Playwright) ficam na
+[`isis-report-lib`](https://github.com/thepaneb/isis-report-lib), publicada no
+[PyPI](https://pypi.org/project/isis-report-lib/). O serviço é a camada HTTP/MCP
+sobre a lib: recebe o payload, parseia `.toon` quando necessário e devolve o PDF.
 
 ![Pipeline do isis_report: cliente JSON/.toon/MCP → API Robyn → BaseReportService → Jinja2/Playwright → PDF](docs/architecture.svg)
 
