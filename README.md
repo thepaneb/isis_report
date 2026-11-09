@@ -22,6 +22,8 @@ app/
 Cada módulo segue o pipeline definido em `BaseReportService`:
 `_obter_dados → _tratar_dados → _gerar_html → _gerar_pdf`
 
+![Pipeline do isis_report: cliente JSON/.toon/MCP → API Robyn → BaseReportService → Jinja2/Playwright → PDF](docs/architecture.svg)
+
 ## Setup
 
 ```bash
