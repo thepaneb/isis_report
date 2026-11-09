@@ -333,3 +333,7 @@ Após conectar, o Claude terá acesso às tools `gerar_relatorio_json` e `gerar_
 # Linter
 ruff check . --fix
 ```
+
+## Licença
+
+Distribuído sob a licença MIT. Veja [LICENSE](LICENSE).
