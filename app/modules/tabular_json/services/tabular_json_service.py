@@ -1,11 +1,7 @@
-"""Tabular JSON report service."""
-from typing import Any
+"""Tabular JSON report service (delegates to isis-report-lib)."""
 
-from modules.shared_report_service import SharedReportService
+from isis_report_lib.service import TabularReportService
 
 
-class TabularJsonService(SharedReportService):
-    """Service for generating reports from JSON payloads."""
-
-    async def _obter_dados(self, payload: dict[str, Any]) -> Any:
-        return payload.get("data", [])
+class TabularJsonService(TabularReportService):
+    """JSON payloads use the library's default tabular pipeline."""

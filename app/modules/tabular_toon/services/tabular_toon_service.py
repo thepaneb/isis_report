@@ -1,11 +1,7 @@
-"""Tabular .toon report service."""
-from typing import Any
+"""Tabular .toon report service (delegates to isis-report-lib)."""
 
-from modules.shared_report_service import SharedReportService
+from isis_report_lib.service import TabularReportService
 
 
-class TabularToonService(SharedReportService):
-    """Service for generating reports from .toon format payloads."""
-
-    async def _obter_dados(self, payload: dict[str, Any]) -> Any:
-        return payload.get("data", [])
+class TabularToonService(TabularReportService):
+    """.toon text is parsed first; generation uses the library's tabular pipeline."""

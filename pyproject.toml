@@ -5,6 +5,7 @@ description = "Isis Report with Robyn"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "isis-report-lib>=0.3.0",
     "jinja2",
     "playwright",
     "robyn[all]",

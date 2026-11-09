@@ -2,11 +2,11 @@
 import base64
 import json
 
+from isis_report_lib.toon import ToonParser
 from robyn import Robyn
 
 from modules.tabular_json.services.tabular_json_service import TabularJsonService
 from modules.tabular_toon.services.tabular_toon_service import TabularToonService
-from utils.toon_parser import ToonParser
 
 tabular_json_service = TabularJsonService()
 tabular_toon_service = TabularToonService()

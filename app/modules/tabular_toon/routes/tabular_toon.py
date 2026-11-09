@@ -1,12 +1,12 @@
 """Tabular .toon HTTP routes."""
 import json
 
+from isis_report_lib.toon import ToonParser
 from robyn import Request, Response
 
 from modules.tabular_toon.models.tabular_toon import ErrorResponse
 from modules.tabular_toon.router import router
 from modules.tabular_toon.services.tabular_toon_service import TabularToonService
-from utils.toon_parser import ToonParser
 
 service = TabularToonService()
 parser = ToonParser()

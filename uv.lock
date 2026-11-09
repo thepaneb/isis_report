@@ -142,6 +142,7 @@ name = "isis-report"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "isis-report-lib" },
     { name = "jinja2" },
     { name = "playwright" },
     { name = "robyn", extra = ["all"] },
@@ -158,6 +159,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "isis-report-lib", specifier = ">=0.3.0" },
     { name = "jinja2" },
     { name = "playwright" },
     { name = "robyn", extras = ["all"] },
@@ -170,6 +172,20 @@ dev = [
     { name = "pytest-cov" },
     { name = "pytest-html" },
     { name = "ruff" },
+]
+
+[[package]]
+name = "isis-report-lib"
+version = "0.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "jinja2" },
+    { name = "playwright" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/13/e2/519e655cb7b3245d27960bdfcbbf1c7b1b0edd53852020a6a805cbabb49f/isis_report_lib-0.3.0.tar.gz", hash = "sha256:f453b21d11a1a136854670e4f0cd3ea2fa5fa7fe441d3f561eac01860ba93f44", size = 27194, upload-time = "2026-11-09T20:48:00.928Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a8/f9/55094db0e9db86da7be0aa796428616a14b0108078da59d31a96f9b66eb4/isis_report_lib-0.3.0-py3-none-any.whl", hash = "sha256:491213c499adb488ac159c179c65b9e8086e0a7883408405d19b1037fdec8543", size = 22037, upload-time = "2026-11-09T20:47:59.485Z" },
 ]
 
 [[package]]
