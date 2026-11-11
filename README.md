@@ -4,6 +4,8 @@ Microserviço **assíncrono** para geração de relatórios em PDF com layouts h
 
 Aceita payloads em **JSON** ou no formato textual **`.toon`** e produz PDFs prontos para impressão via Playwright.
 
+**Site:** <https://thepaneb.github.io/isis-report/>
+
 <p>
   <a href="https://github.com/thepaneb/isis_report/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/thepaneb/isis_report/actions/workflows/ci.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue"></a>
